@@ -53,6 +53,8 @@ loadMoreBtn.addEventListener('click', async () => {
   try {
     const data = await fetchImages(query, page, perPage);
     renderGallery(data.hits);
+    smoothScroll();
+
     if (page * perPage >= totalHits) {
       hideLoadMoreBtn();
       renderEndMessage();
@@ -82,7 +84,16 @@ function hideLoadMoreBtn() {
   loadMoreBtn.style.display = 'none';
 }
 
-
+function smoothScroll() {
+  const galleryCard = document.querySelector('.gallery-item');
+  if (galleryCard) {
+    const cardHeight = galleryCard.getBoundingClientRect().height;
+    window.scrollBy({
+      top: cardHeight * 2,
+      behavior: 'smooth',
+    });
+  }
+}
 
   const input = document.querySelector('input[name="searchQuery"]');
 
