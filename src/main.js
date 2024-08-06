@@ -33,7 +33,11 @@ form.addEventListener('submit', async (event) => {
       renderError("Sorry, there are no images matching your search query. Please try again!");
     } else {
       renderGallery(data.hits);
-      showLoadMoreBtn();
+      if (data.hits.length < perPage || page * perPage >= totalHits) {
+        hideLoadMoreBtn();
+      } else {
+        showLoadMoreBtn();
+      }
       // if (data.hits.length === 15) {
       //   showLoadMoreBtn();
       // }
