@@ -59,7 +59,7 @@ loadMoreBtn.addEventListener('click', async () => {
     renderGallery(data.hits);
     smoothScroll();
 
-    if (page * perPage >= totalHits) {
+     if (data.hits.length < perPage || page * perPage >= totalHits) {
       hideLoadMoreBtn();
       renderEndMessage();
     } else {
@@ -93,7 +93,7 @@ function smoothScroll() {
   if (galleryCard) {
     const cardHeight = galleryCard.getBoundingClientRect().height;
     window.scrollBy({
-      top: cardHeight * 2,
+      top: cardHeight * 4,
       behavior: 'smooth',
     });
   }
